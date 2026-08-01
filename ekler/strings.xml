@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AbdullahQL</string>
+    <string name="pairing_title">Arkadaş Eşleştirme</string>
+    <string name="map_title">Konum Takip</string>
+
+    <string name="notif_channel_name">Konum Paylaşımı</string>
+    <string name="notif_title">AbdullahQL aktif</string>
+    <string name="notif_text">Konumun arkadaşınla paylaşılıyor</string>
+
+    <string name="btn_grant_permissions">İzinleri Ver</string>
+    <string name="btn_battery_exempt">Pil Kısıtlamasını Kaldır</string>
+    <string name="btn_start_sharing">Paylaşımı Başlat</string>
+    <string name="btn_stop_sharing">Paylaşımı Durdur</string>
+    <string name="btn_pair">Arkadaş Ekle</string>
+    <string name="my_code_label">Senin eşleştirme kodun:</string>
+    <string name="enter_code_hint">Arkadaşının kodunu gir</string>
+</resources>
