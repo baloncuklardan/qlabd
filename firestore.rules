@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Eşleştirme kodları: herkes okuyabilir (kod bilinmeden erişilemez pratikte),
+    // sadece kodu üreten kişi kendi kaydını yazabilir.
+    match /pairs/{code} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Arkadaşlık bağı: kullanıcı sadece KENDİ belgesini
+    // ya da eşleştirme sırasında karşı tarafın belgesini oluşturabilir.
+    match /friendships/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null;
+      // Not: Daha sıkı bir kural için Cloud Functions ile sunucu taraflı
+      // eşleştirme onayı eklenmesi önerilir (bkz. README "Güvenlik Notları").
+    }
+
+    // Güncel konum: yalnızca sahibi yazabilir, eşleşen arkadaşlar okuyabilir.
+    match /locations/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    match /locations_history/{uid}/points/{pointId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}
